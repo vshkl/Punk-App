@@ -1,10 +1,9 @@
-package by.vshkl.punkapp.data.dto
+package by.vshkl.punkapp.data.remote.dto
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class MashTempDto(
-    @Json(name = "duration") val duration: Int,
+data class FermentationDto(
     @Json(name = "temp") val temp: TempDto
 )
