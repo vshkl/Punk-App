@@ -1,4 +1,4 @@
-package by.vshkl.punkapp.ui.theme
+package by.vshkl.punkapp.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
