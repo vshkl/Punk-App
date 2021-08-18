@@ -1,6 +1,6 @@
-package by.vshkl.punkapp.data.remote
+package by.vshkl.punkapp.framework.network
 
-import by.vshkl.punkapp.data.remote.dto.BeerDto
+import by.vshkl.punkapp.framework.network.dto.BeerDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

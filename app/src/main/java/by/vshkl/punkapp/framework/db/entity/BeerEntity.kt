@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = BeerEntity.TABLE_NAME)
 data class BeerEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey val id: Int,
     val name: String,
     val tagline: String,
     val description: String,
