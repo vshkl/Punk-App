@@ -8,7 +8,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
@@ -17,7 +17,25 @@ import androidx.compose.ui.unit.dp
 import by.vshkl.punkapp.domain.model.Beer
 import by.vshkl.punkapp.presentation.ui.components.molecule.BeerRow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.onEach
+
+/**
+ * [ScrollPosition] represents current scroll position. It holds current and last indexes.
+ *
+ * @param currentIndex  Current scroll index
+ * @param lastIndex     Last possible scroll index
+ */
+data class ScrollPosition(
+    val currentIndex: Int,
+    val lastIndex: Int
+) {
+
+    val isNotEmpty: Boolean
+        get() = currentIndex > 0 && lastIndex > 0
+    val isReachedLast: Boolean
+        get() = isNotEmpty && currentIndex == lastIndex
+}
 
 @Composable
 fun BeerList(
@@ -26,21 +44,13 @@ fun BeerList(
     onClick: (beer: Beer) -> Unit = {}
 ) {
     val listState = rememberLazyListState()
-    val loadMore = remember {
-        derivedStateOf {
-            val layoutInfo = listState.layoutInfo
-            val totalItemsNumber = layoutInfo.totalItemsCount
-            val lastVisibleItemIndex = (layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0) + 1
-
-            lastVisibleItemIndex > (totalItemsNumber - 2)
-        }
-    }
+    val farthestIndex = remember { mutableStateOf(0) }
 
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight(),
-        state = listState
+        state = listState,
     ) {
         items(
             items = beers,
@@ -51,10 +61,21 @@ fun BeerList(
         }
     }
 
-    LaunchedEffect(loadMore) {
-        snapshotFlow { loadMore.value }
-            .distinctUntilChanged()
-            .collect { onLoadMore() }
+    LaunchedEffect(listState) {
+        snapshotFlow {
+            ScrollPosition(
+                currentIndex = listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0,
+                lastIndex = listState.layoutInfo.totalItemsCount - 1
+            )
+        }.filter {
+            it.isNotEmpty && it.currentIndex > farthestIndex.value
+        }.onEach {
+            farthestIndex.value = it.currentIndex
+        }.collect {
+            if (it.isReachedLast) {
+                onLoadMore()
+            }
+        }
     }
 }
 
