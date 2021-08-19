@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "37bc499ea250694e25db056993d62966",
+    "identityHash": "2158db46ef2fc0eee8b2498a042cede0",
     "entities": [
       {
         "tableName": "beers",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `tagline` TEXT NOT NULL, `description` TEXT NOT NULL, `abv` REAL NOT NULL, `ibu` INTEGER NOT NULL, `ebc` INTEGER NOT NULL, `ph` REAL NOT NULL, `imageUrl` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `tagline` TEXT NOT NULL, `description` TEXT NOT NULL, `abv` REAL NOT NULL, `ibu` REAL NOT NULL, `imageUrl` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -41,18 +41,6 @@
           {
             "fieldPath": "ibu",
             "columnName": "ibu",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "ebc",
-            "columnName": "ebc",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "ph",
-            "columnName": "ph",
             "affinity": "REAL",
             "notNull": true
           },
@@ -76,7 +64,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '37bc499ea250694e25db056993d62966')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2158db46ef2fc0eee8b2498a042cede0')"
     ]
   }
 }
