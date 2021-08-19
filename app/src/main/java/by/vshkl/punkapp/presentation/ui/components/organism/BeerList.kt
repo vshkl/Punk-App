@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -12,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import by.vshkl.punkapp.domain.model.Beer
 import by.vshkl.punkapp.presentation.ui.components.molecule.BeerRow
 import kotlinx.coroutines.flow.collect
@@ -45,6 +47,7 @@ fun BeerList(
             key = { it::id }
         ) { beer ->
             BeerRow(beer = beer, onClick = onClick)
+            Divider(startIndent = 16.dp)
         }
     }
 

@@ -7,8 +7,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import by.vshkl.punkapp.domain.model.Beer
 
 @Composable
@@ -22,8 +25,20 @@ fun BeerRow(
             .padding(16.dp, 8.dp)
             .fillMaxWidth()
     ) {
-        Text(text = beer.name)
-        Text(text = beer.tagline)
+        Text(
+            text = beer.name,
+            fontSize = 22.sp,
+            fontWeight = FontWeight.SemiBold,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
+        Text(
+            text = beer.tagline,
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Light,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
     }
 }
 
