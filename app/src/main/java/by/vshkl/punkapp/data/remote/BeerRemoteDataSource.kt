@@ -15,10 +15,8 @@ class BeerRemoteDataSource(
                     name = beerDto.name,
                     tagline = beerDto.tagline,
                     description = beerDto.description,
-                    abv = beerDto.abv,
-                    ibu = beerDto.ibu,
-                    ebc = beerDto.ebc,
-                    ph = beerDto.ph,
+                    abv = beerDto.abv ?: 0.0,
+                    ibu = beerDto.ibu ?: 0.0,
                     imageUrl = beerDto.imageUrl
                 )
             }

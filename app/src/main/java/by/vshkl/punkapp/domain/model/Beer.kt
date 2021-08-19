@@ -6,8 +6,6 @@ data class Beer(
     val tagline: String,
     val description: String,
     val abv: Double,
-    val ibu: Int,
-    val ebc: Int,
-    val ph: Double,
+    val ibu: Double,
     val imageUrl: String,
 )

@@ -20,8 +20,6 @@ class BeerLocalDataSource(
                     description = beer.description,
                     abv = beer.abv,
                     ibu = beer.ibu,
-                    ebc = beer.ebc,
-                    ph = beer.ph,
                     imageUrl = beer.imageUrl
                 )
             )
@@ -30,19 +28,19 @@ class BeerLocalDataSource(
 
     fun observeBeers(): Flow<List<Beer>> {
         return database.beerDao().observeBeers().transform {
-            it.map { beerEntity ->
-                Beer(
-                    id = beerEntity.id,
-                    name = beerEntity.name,
-                    tagline = beerEntity.tagline,
-                    description = beerEntity.description,
-                    abv = beerEntity.abv,
-                    ibu = beerEntity.ibu,
-                    ebc = beerEntity.ebc,
-                    ph = beerEntity.ph,
-                    imageUrl = beerEntity.imageUrl
-                )
-            }
+            emit(
+                it.map { beerEntity ->
+                    Beer(
+                        id = beerEntity.id,
+                        name = beerEntity.name,
+                        tagline = beerEntity.tagline,
+                        description = beerEntity.description,
+                        abv = beerEntity.abv,
+                        ibu = beerEntity.ibu,
+                        imageUrl = beerEntity.imageUrl
+                    )
+                }
+            )
         }
     }
 }
