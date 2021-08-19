@@ -9,3 +9,4 @@ Simple app to play with Jetpack Compose and architecture. Uses [PunkAPI](https:/
 - Jetpack Compose
 - Retrofit2 & Moshi Codegen
 - Room
+- DI with Koin
