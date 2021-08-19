@@ -37,9 +37,7 @@ fun BeerRowPreview() {
             tagline = "Drink me!",
             description = "Eh?",
             abv = 5.0,
-            ibu = 60,
-            ebc = 10,
-            ph = 2.0,
+            ibu = 60.0,
             imageUrl = ""
         )
     )
